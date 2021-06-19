@@ -6,11 +6,11 @@ import { UsersService } from './users.service';
 export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
-    // @Get()
-    // async allUser() {
-    //     const users = await this.usersService.index();
-    //     return users;
-    // }
+    @Get()
+    async allUser() {
+        const users = await this.usersService.index();
+        return users;
+    }
 
     @Post()
     @UsePipes(new ValidationPipe({ transform: true }))
@@ -19,9 +19,9 @@ export class UsersController {
         return user;
     }
 
-    @Get()
-    singleUser() {
-        const user = this.usersService.getOne("parsonal494@gmail.com");
-        return user;
-    }
+    // @Get()
+    // singleUser() {
+    //     const user = this.usersService.getOne("parsonal494@gmail.com");
+    //     return user;
+    // }
 }

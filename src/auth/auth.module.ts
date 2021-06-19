@@ -5,7 +5,7 @@ import { PassportModule } from '@nestjs/passport';
 import { UsersModule } from 'src/users/users.module';
 import { UsersSchema } from 'src/users/users.schema';
 import { AuthService } from './auth.service';
-import { JwtConstant } from './constant';
+import JwtConstant  from './constant';
 import { JwtStrategy } from './jwt.strategy';
 import { LocalStrategy } from './local.strategy';
 
@@ -15,8 +15,8 @@ import { LocalStrategy } from './local.strategy';
     MongooseModule.forFeature([{name:"Usesr", schema: UsersSchema}]),
     PassportModule,
     JwtModule.register({
-      secret: JwtConstant.secret,
-      signOptions: {expiresIn: '120s'}
+      secret: JwtConstant().secret,
+      signOptions: {expiresIn: '20000s'}
     })
     ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
