@@ -6,9 +6,10 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import JwtConstant  from './auth/constant';
-import { CustomerModule } from './customer/customer.module';
 import { StoreManagementModule } from './store-management/store-management.module';
 import { TableManagementModule } from './table-management/table-management.module';
+import { CustomerModule } from './customer-management/customer.module';
+import { WaiterManagementModule } from './waiter-management/waiter-management.module';
 
 
 @Module({
@@ -18,11 +19,12 @@ import { TableManagementModule } from './table-management/table-management.modul
       envFilePath: ".env",
       load: [JwtConstant]
     }),
-    MongooseModule.forRoot('mongodb+srv://letsbuild:anis5221@cluster0.wzqth.mongodb.net/restorent-api?retryWrites=true&w=majority'),
-     AuthModule,
+    MongooseModule.forRoot('mongodb+srv://letsbuild:anis5221@cluster0.wzqth.mongodb.net/restorent-api?retryWrites=true&w=majority', { useFindAndModify: false }),
+    AuthModule,
     CustomerModule,
     StoreManagementModule,
-    TableManagementModule],
+    TableManagementModule,
+    WaiterManagementModule],
   controllers: [AppController],
   providers: [AppService],
 })

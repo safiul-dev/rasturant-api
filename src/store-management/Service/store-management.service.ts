@@ -1,7 +1,6 @@
 import { HttpException, Injectable, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateCustomerDto } from 'src/customer/customer.dto';
 import { CreateStoreDto } from '../Model-Schema/store.dto';
 import { Store } from '../Model-Schema/store.model';
 
