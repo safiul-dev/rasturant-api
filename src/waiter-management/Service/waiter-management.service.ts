@@ -33,7 +33,7 @@ export class WaiterManagementService {
         try {
             const waiter =await new this.waiterModel(waterDto);
             await waiter.save();
-            return "waiter Created!";
+            return {message: "waiter Created!"};
         } catch (error) {
             throw new UnprocessableEntityException();       
         }
@@ -64,7 +64,7 @@ export class WaiterManagementService {
     async update(id: string,waterDto: CreateWaiterDto) {
         try {
             await this.waiterModel.findByIdAndUpdate(id, waterDto).exec()
-            return "success!";
+            return {message: "success!"};
         } catch (error) {
             throw new NotFoundException();
         }
@@ -74,7 +74,7 @@ export class WaiterManagementService {
     async delete(id) {
         try {
             const waiter = await this.waiterModel.findByIdAndDelete(id);
-            return "Waiter Deleted!";
+            return {message: "Waiter Deleted!"};
         } catch (error) {
             throw new NotFoundException();
         }

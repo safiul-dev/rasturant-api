@@ -10,6 +10,7 @@ import { StoreManagementModule } from './store-management/store-management.modul
 import { TableManagementModule } from './table-management/table-management.module';
 import { CustomerModule } from './customer-management/customer.module';
 import { WaiterManagementModule } from './waiter-management/waiter-management.module';
+import { CategoryManagementModule } from './category-management/category-management.module';
 
 
 @Module({
@@ -24,7 +25,8 @@ import { WaiterManagementModule } from './waiter-management/waiter-management.mo
     CustomerModule,
     StoreManagementModule,
     TableManagementModule,
-    WaiterManagementModule],
+    WaiterManagementModule,
+    CategoryManagementModule],
   controllers: [AppController],
   providers: [AppService],
 })

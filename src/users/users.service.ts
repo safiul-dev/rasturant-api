@@ -35,9 +35,29 @@ export class UsersService {
         }
     }
 
+    // password Hasshing method
      protected passwordHashed(password: string) {
         const pass = bcrypt.hashSync(password, 10);
         return pass;
+    }
+
+
+    // finding user using id here....
+     async edit (id: string) {
+        const user = await this.userModel.findById(id).exec();
+        return {
+            id: user.id,
+            firstName: user.firstname,
+            lastName: user.lastname,
+            email: user.username
+        };
+    }
+
+
+    async userFullName (id: string) {
+        const user = await this.userModel.findById(id).exec();
+        return user.firstname + " " + user.lastname;
+
     }
 
 

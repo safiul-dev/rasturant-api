@@ -1,9 +1,9 @@
-import * as moongose from "mongoose"
+import * as mongoose from "mongoose"
 
-export const WaiterSchema = new moongose.Schema({
+export const WaiterSchema = new mongoose.Schema({
 
     uniq: {type: String},
-    userId: {type: String},
+    userId: {type: mongoose.SchemaTypes.ObjectId},
     name: {type: String},
     phone: {type: String, Null: true},
     email: {type: String, Null: true},
