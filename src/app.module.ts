@@ -11,6 +11,8 @@ import { TableManagementModule } from './table-management/table-management.modul
 import { CustomerModule } from './customer-management/customer.module';
 import { WaiterManagementModule } from './waiter-management/waiter-management.module';
 import { CategoryManagementModule } from './category-management/category-management.module';
+import { ItemManagementModule } from './item-management/item-management.module';
+import { SubPricingModule } from './sub-item-pricing/sub-pricing.module';
 
 
 @Module({
@@ -26,7 +28,9 @@ import { CategoryManagementModule } from './category-management/category-managem
     StoreManagementModule,
     TableManagementModule,
     WaiterManagementModule,
-    CategoryManagementModule],
+    CategoryManagementModule,
+    ItemManagementModule,
+    SubPricingModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -21,13 +21,13 @@ export class CategoryManagementService {
             const  categoryss = await categorys.map((category) => ({
                 id: category.id,
                 uniq: category.uniq,
-                userName: this.getUserName(category.userId).toString() ,
+                userName: category.userId,
                 parent: category.parent,
                 title: category.title,
                 active: category.active,
             }));
  
-                    return await categoryss;
+            return categoryss;
         } catch (error) {
             throw new NotFoundException()
         }
