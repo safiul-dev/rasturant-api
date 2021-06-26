@@ -24,7 +24,6 @@ export class TableManagementController {
     async createtable(@CurrentUser() user: User,@Body() createtableDto: CreateTableDto) {
         
         createtableDto.storeId = (await this.storeService.findStoreId(user.id)).toString();
-        createtableDto.uniq = user.id + createtableDto.uniq
         createtableDto.userId = user.id;
         const table = await this.tableService.addTable(createtableDto);
         return table;

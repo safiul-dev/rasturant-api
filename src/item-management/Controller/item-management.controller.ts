@@ -20,7 +20,6 @@ export class ItemManagementController {
     @UseGuards(JwtAuthGuard)
     @UsePipes(new ValidationPipe({transform: true}))
     async addItem(@CurrentUser() user: User, @Body() itemDto: CreateItemDto) {
-        itemDto.uniq = user.id + itemDto.uniq;
         itemDto.userId = user.id;
         const item = await this.itemService.create(itemDto);
         return item;

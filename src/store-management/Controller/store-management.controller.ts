@@ -21,7 +21,6 @@ export class StoreManagementController {
     @UsePipes(new ValidationPipe({transform: true}))
     async createStore(@CurrentUser() user: User,@Body() createStoreDto: CreateStoreDto) {
         
-        createStoreDto.uniq = user.id + createStoreDto.uniq
         createStoreDto.userId = user.id;
          const store = await this.storeService.addStore(createStoreDto);
         return store;

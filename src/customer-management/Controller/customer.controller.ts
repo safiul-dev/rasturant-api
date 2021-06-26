@@ -20,7 +20,6 @@ export class CustomerController {
     @UseGuards(JwtAuthGuard)
     @UsePipes(new ValidationPipe({transform: true}))
     async addCustomer(@CurrentUser() user: User, @Body() customerDto: CreateCustomerDto) {
-        customerDto.uniq = user.id + customerDto.uniq;
         customerDto.userId = user.id;
         const customer = await this.customerService.create(customerDto);
         return customer;

@@ -13,6 +13,7 @@ import { WaiterManagementModule } from './waiter-management/waiter-management.mo
 import { CategoryManagementModule } from './category-management/category-management.module';
 import { ItemManagementModule } from './item-management/item-management.module';
 import { SubPricingModule } from './sub-item-pricing/sub-pricing.module';
+import { WorkPeriodsModule } from './work-periods/work-periods.module';
 
 
 @Module({
@@ -30,7 +31,8 @@ import { SubPricingModule } from './sub-item-pricing/sub-pricing.module';
     WaiterManagementModule,
     CategoryManagementModule,
     ItemManagementModule,
-    SubPricingModule],
+    SubPricingModule,
+    WorkPeriodsModule],
   controllers: [AppController],
   providers: [AppService],
 })

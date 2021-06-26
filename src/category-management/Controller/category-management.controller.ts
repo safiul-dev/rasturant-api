@@ -21,7 +21,6 @@ export class CategoryManagementController {
     @UseGuards(JwtAuthGuard)
     @UsePipes(new ValidationPipe({transform: true}))
     async addcategory(@CurrentUser() user: User, @Body() categoryDto: CreateCategoryDto) {
-        categoryDto.uniq = user.id + categoryDto.uniq;
         categoryDto.userId = user.id;
         const category = await this.categoryService.create(categoryDto);
         return category;

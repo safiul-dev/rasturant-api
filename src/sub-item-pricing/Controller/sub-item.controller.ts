@@ -19,8 +19,8 @@ export class SubPricingController {
     @Post()
     @UseGuards(JwtAuthGuard)
     @UsePipes(new ValidationPipe({transform: true}))
-    async addItem(@CurrentUser() user: User, @Body() itemDto: CreateSubPricingDto) {
-        itemDto.uniq = user.id + itemDto.uniq;
+    async addItem( @Body() itemDto: CreateSubPricingDto) {
+        itemDto.uniq =itemDto.uniq;
         
         const item = await this.subPricingService.create(itemDto);
         return item;

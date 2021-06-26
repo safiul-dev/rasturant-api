@@ -21,7 +21,6 @@ export class WaiterManagementController {
     @UseGuards(JwtAuthGuard)
     @UsePipes(new ValidationPipe({transform: true}))
     async addWaiter(@CurrentUser() user: User, @Body() waiterDto: CreateWaiterDto) {
-        waiterDto.uniq = user.id + waiterDto.uniq;
         waiterDto.userId = user.id;
         const waiter = await this.waiterService.create(waiterDto);
         return waiter;
