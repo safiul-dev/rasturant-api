@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CurrentUser } from 'src/auth/Custome-Decoreator/user.decorator';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { User } from 'src/users/users.model';
+import { User } from 'src/users/Model/users.model';
 import { CreateSubPricingDto } from '../Model-Schema/sub-pricing.dto';
 import { SubPricingService } from '../Service/sub-item.service';
 

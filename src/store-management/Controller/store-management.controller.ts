@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CurrentUser } from 'src/auth/Custome-Decoreator/user.decorator';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { User } from 'src/users/users.model';
+import { User } from 'src/users/Model/users.model';
 import { CreateStoreDto } from '../Model-Schema/store.dto';
 import { StoreManagementService } from '../Service/store-management.service';
 

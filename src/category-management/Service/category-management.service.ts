@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from 'src/users/Service/users.service';
 import { CreateCategoryDto } from '../Model-Schema/category.dto';
 import { Category } from '../Model-Schema/category.model';
 

@@ -19,7 +19,7 @@ export class TableManagementService {
                 storeId: table.storeId,
                 title: table.title,
                 capacity: table.capacity,
-                status: table.available_status
+                available_status: table.available_status
             }))
         } catch (error) {
             throw new NotFoundException();
@@ -54,7 +54,7 @@ export class TableManagementService {
                 storeId: table.storeId,
                 title: table.title,
                 capacity: table.capacity,
-                status: table.available_status
+                available_status: table.available_status
             }
         } catch (error) {
             throw new NotFoundException();

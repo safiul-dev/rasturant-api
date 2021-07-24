@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, UsePipes, V
 import { CurrentUser } from 'src/auth/Custome-Decoreator/user.decorator';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { StoreManagementService } from 'src/store-management/Service/store-management.service';
-import { User } from 'src/users/users.model';
+import { User } from 'src/users/Model/users.model';
 import { CreateTableDto } from '../Model-Schema/table.dto';
 import { TableManagementService } from '../Service/table-management.service';
 
@@ -12,7 +12,6 @@ export class TableManagementController {
     constructor (private readonly tableService: TableManagementService, private storeService: StoreManagementService) {}
 
     @Get()
-    @UseGuards(JwtAuthGuard)
     async getAll() {
         const tables = await this.tableService.findTable();
         return tables;
