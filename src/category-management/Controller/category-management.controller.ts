@@ -5,36 +5,43 @@ import { User } from 'src/users/Model/users.model';
 import { CreateCategoryDto } from '../Model-Schema/category.dto';
 import { CategoryManagementService } from '../Service/category-management.service';
 
-@Controller('api/category')
+@Controller('api/categorys')
 export class CategoryManagementController {
     
     constructor(private readonly categoryService: CategoryManagementService) {}
 
     @Get()
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     async allcategory() {
         const categorys = await this.categoryService.index();
         return categorys;
     }
 
+    @Get("/active")
+    async activeCategorys() {
+        const category = await this.categoryService.getActiveCategorys();
+        return category;
+    }
+
     @Post()
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @UsePipes(new ValidationPipe({transform: true}))
-    async addcategory(@CurrentUser() user: User, @Body() categoryDto: CreateCategoryDto) {
-        categoryDto.userId = user.id;
+    async addcategory(@Body() categoryDto: CreateCategoryDto) {
+        
         const category = await this.categoryService.create(categoryDto);
         return category;
     }
 
     @Get(':id')
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     async getOneCategory(@Param('id') id: string) {
         const category = await this.categoryService.edit(id);
         return category;
     }
 
+
     @Put(":id")
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @UsePipes(new ValidationPipe({transform: true}))
     async categoryUpdate(@Param('id') id: string, @Body() categoryDto: CreateCategoryDto) {
         const category = await this.categoryService.update( id,categoryDto);
@@ -42,7 +49,7 @@ export class CategoryManagementController {
     }
 
     @Delete(':id')
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     async categoryDelete(@Param('id') id: string) {
         const result = await this.categoryService.delete(id);
         return result;

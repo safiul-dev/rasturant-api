@@ -91,4 +91,16 @@ export class CategoryManagementService {
         const user = this.userService.userFullName(id);
         return user;
     }
+
+    async getActiveCategorys () {
+        const categorys = await this.categoryModel.find({active: true}).exec();
+        return categorys.map(category => ({
+            id: category.id,
+            uniq: category.uniq,
+            userName: category.userId,
+            parent: category.parent,
+            title: category.title,
+            active: category.active,
+        }))
+    }
 }

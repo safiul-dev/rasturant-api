@@ -27,6 +27,25 @@ export class SubPricingService {
         
     }
 
+    async getAllByItem (itemUniq: string) {
+        return itemUniq;
+        // try {
+        //     const subItems = await this.subPricingModel.find({itemUniq: itemUniq}).exec();
+        //     return subItems.map( item => ({ 
+        //         id: item.id,
+        //         uniq: item.uniq,
+        //         title: item.title,
+        //         description: item.description,
+        //         ratio: item.ratio,
+        //         itemUniq: item.itemUniq,
+        //         price: item.price,
+                
+        //     }))
+        // } catch (error) {
+        //     throw new NotFoundException();
+        // }
+    }
+
     async create(subPricingDto: CreateSubPricingDto) {
 
         try {

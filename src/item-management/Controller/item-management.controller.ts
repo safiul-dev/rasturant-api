@@ -10,30 +10,30 @@ export class ItemManagementController {
     constructor(private readonly itemService: ItemManagementService) {}
 
     @Get()
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     async allItem() {
         const items = await this.itemService.index();
         return items;
     }
 
     @Post()
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @UsePipes(new ValidationPipe({transform: true}))
-    async addItem(@CurrentUser() user: User, @Body() itemDto: CreateItemDto) {
-        itemDto.userId = user.id;
+    async addItem(@Body() itemDto: CreateItemDto) {
+   
         const item = await this.itemService.create(itemDto);
         return item;
     }
 
     @Get(':id')
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     async getOneItem(@Param('id') id: string) {
         const item = await this.itemService.edit(id);
         return item;
     }
 
     @Put(":id")
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @UsePipes(new ValidationPipe({transform: true}))
     async itemUpdate(@Param('id') id: string, @Body() itemDto: CreateItemDto) {
         const item = await this.itemService.update( id,itemDto);
@@ -41,7 +41,7 @@ export class ItemManagementController {
     }
 
     @Delete(':id')
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     async itemDelete(@Param('id') id: string) {
         const result = await this.itemService.delete(id);
         return result;

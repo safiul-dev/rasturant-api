@@ -18,25 +18,25 @@ export class TableManagementController {
     }
 
     @Post()
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @UsePipes(new ValidationPipe({transform: true}))
-    async createtable(@CurrentUser() user: User,@Body() createtableDto: CreateTableDto) {
+    async createtable(@Body() createtableDto: CreateTableDto) {
         
-        createtableDto.storeId = (await this.storeService.findStoreId(user.id)).toString();
-        createtableDto.userId = user.id;
+        // createtableDto.storeId = (await this.storeService.findStoreId(user.id)).toString();
+        // createtableDto.userId = user.id;
         const table = await this.tableService.addTable(createtableDto);
         return table;
     }
 
     @Get(':id')
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     async gettableOne(@Param('id') id: string) {
         const table = await this.tableService.findOne(id)
         return table;
     }
 
     @Put(':id')
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     async updatetable(@Param('id') id: string, @Body() createtableDto: CreateTableDto) {
         const table = await this.tableService.updateTable(id, createtableDto);
         return table;

@@ -10,31 +10,38 @@ export class SubPricingController {
     constructor(private readonly subPricingService: SubPricingService) {}
 
     @Get()
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     async allItem() {
         const items = await this.subPricingService.index();
         return items;
     }
 
+    @Get('/itemUniq')
+    async getAllSubItemByItemUniq (@Body('id') id: string) {
+        const items = await this.subPricingService.getAllByItem(id)
+        return items;
+    }
+
+
+
     @Post()
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @UsePipes(new ValidationPipe({transform: true}))
     async addItem( @Body() itemDto: CreateSubPricingDto) {
-        itemDto.uniq =itemDto.uniq;
         
         const item = await this.subPricingService.create(itemDto);
         return item;
     }
 
     @Get(':id')
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     async getOneitem(@Param('id') id: string) {
         const item = await this.subPricingService.edit(id);
         return item;
     }
 
     @Put(":id")
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @UsePipes(new ValidationPipe({transform: true}))
     async itemUpdate(@Param('id') id: string, @Body() itemDto: CreateSubPricingDto) {
         const item = await this.subPricingService.update( id,itemDto);
@@ -42,7 +49,7 @@ export class SubPricingController {
     }
 
     @Delete(':id')
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     async itemDelete(@Param('id') id: string) {
         const result = await this.subPricingService.delete(id);
         return result;

@@ -5,35 +5,35 @@ import { User } from 'src/users/Model/users.model';
 import { CreateCustomerDto } from '../Model-Schema/customer.dto';
 import { CustomerService } from '../Service/customer.service';
 
-@Controller('api/customer')
+@Controller('api/customers')
 export class CustomerController {
     constructor(private readonly customerService: CustomerService) {}
 
     @Get()
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     async allCustomer() {
         const customers = await this.customerService.index();
         return customers;
     }
 
     @Post()
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @UsePipes(new ValidationPipe({transform: true}))
-    async addCustomer(@CurrentUser() user: User, @Body() customerDto: CreateCustomerDto) {
-        customerDto.userId = user.id;
+    async addCustomer( @Body() customerDto: CreateCustomerDto) {
+        // customerDto.userId = user.id;
         const customer = await this.customerService.create(customerDto);
         return customer;
     }
 
     @Get(':id')
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     async getOneCustomer(@Param('id') id: string) {
         const customer = await this.customerService.edit(id);
         return customer;
     }
 
     @Put(":id")
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @UsePipes(new ValidationPipe({transform: true}))
     async customerUpdate(@Param('id') id: string, @Body() customerDto: CreateCustomerDto) {
         const customer = await this.customerService.update( id,customerDto);
@@ -41,7 +41,7 @@ export class CustomerController {
     }
 
     @Delete(':id')
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     async customerDelete(@Param('id') id: string) {
         const result = await this.customerService.delete(id);
         return result;

@@ -8,13 +8,13 @@ export class CreateTableDto {
 
      storeId: string
 
-    @IsString()
-    @Length(2, 256)
+//     @IsString()
+//     @Length(2, 256)
      title: string
 
      @IsNumber()
      capacity: number
 
-    @IsBoolean()
+//     @IsBoolean()
      available_status: boolean
 }

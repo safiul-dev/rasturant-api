@@ -3,7 +3,7 @@ import * as mongoose from "mongoose";
 export const CustomerSchema = new mongoose.Schema({
     
      uniq: {type: String},
-     userId: {type: mongoose.SchemaTypes.ObjectId},
+     userId: {type: String},
      name: {type: String},
      phone: {type: String, default: null},
      email: {type: String, default: null},

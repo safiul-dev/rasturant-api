@@ -8,6 +8,5 @@ export class CreateCategoryDto {
     @IsString()
     @Length(2, 256)
     title: string
-    @IsBoolean()
     active: boolean
 }
