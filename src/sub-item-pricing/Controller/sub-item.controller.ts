@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Req, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CurrentUser } from 'src/auth/Custome-Decoreator/user.decorator';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { User } from 'src/users/Model/users.model';
@@ -16,8 +16,9 @@ export class SubPricingController {
         return items;
     }
 
-    @Get('/itemUniq')
+    @Post('/itemUniq')
     async getAllSubItemByItemUniq (@Body('id') id: string) {
+       
         const items = await this.subPricingService.getAllByItem(id)
         return items;
     }
