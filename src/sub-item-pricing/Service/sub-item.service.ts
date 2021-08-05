@@ -12,7 +12,7 @@ export class SubPricingService {
         try {
             const subPricings = await this.subPricingModel.find().exec();
             return subPricings.map((subPricing) => ({
-                id: subPricing.id,
+                
                 uniq: subPricing.uniq,
                 title: subPricing.title,
                 description: subPricing.description,
@@ -32,7 +32,7 @@ export class SubPricingService {
         try {
             const subItems = await this.subPricingModel.find({itemUniq: itemUniq}).exec();
             return subItems.map( item => ({ 
-                id: item.id,
+                
                 uniq: item.uniq,
                 title: item.title,
                 description: item.description,
@@ -78,9 +78,10 @@ export class SubPricingService {
     }
 
 
-    async update(id: string,subPricingDto: CreateSubPricingDto) {
+    async update(id: string,subPricingDto: CreateSubPricingDto){
         try {
-            await this.subPricingModel.findByIdAndUpdate(id, subPricingDto).exec()
+            await this.subPricingModel.findOneAndUpdate({uniq: id}, subPricingDto).exec();
+           
             return {message: "success!"};
         } catch (error) {
             throw new NotFoundException();
@@ -90,7 +91,7 @@ export class SubPricingService {
 
     async delete(id) {
         try {
-            const subPricing = await this.subPricingModel.findByIdAndDelete(id);
+            await this.subPricingModel.findOneAndDelete({uniq: id}).exec();
             return {message: "subPricing Deleted!"};
         } catch (error) {
             throw new NotFoundException();

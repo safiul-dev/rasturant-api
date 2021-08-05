@@ -6,6 +6,6 @@ export interface Table extends mongoose.Document{
     readonly userId: string
     readonly storeId: string
     readonly title: string
-    readonly capacity: number
+    readonly capacity: string
     readonly available_status: boolean
 }

@@ -13,7 +13,6 @@ export class TableManagementService {
         try {
             const tables = await this.tableModel.find();
             return tables.map((table) => ({
-                id: table.id,
                 uniq: table.uniq,
                 userId: table.userId,
                 storeId: table.storeId,
@@ -48,7 +47,6 @@ export class TableManagementService {
         try {
             const table = await this.tableModel.findById(id).exec();
             return {
-                id: table.id,
                 uniq: table.uniq,
                 userId: table.userId,
                 storeId: table.storeId,
@@ -63,7 +61,7 @@ export class TableManagementService {
 
     async updateTable (id: string, tableDto: CreateTableDto) {
         try {
-            const table = await this.tableModel.findByIdAndUpdate(id, tableDto);
+            const table = await this.tableModel.findOneAndUpdate({uniq: id}, tableDto).exec();
         return "update Success";
         } catch (error) {
             throw new NotFoundException()
@@ -72,7 +70,7 @@ export class TableManagementService {
     }
 
     async deleteTable(id: string) {
-        await this.tableModel.findByIdAndDelete(id).exec();
+        await this.tableModel.findOneAndDelete({uniq: id}).exec();
         return {
             message: "Delete Success!"
         }

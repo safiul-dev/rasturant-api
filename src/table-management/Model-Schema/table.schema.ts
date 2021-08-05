@@ -5,6 +5,6 @@ export const TableSchema = new mongoose.Schema({
      userId: {type: String},
      storeId: {type: String},
      title: {type: String},
-     capacity: {type: Number},
+     capacity: {type: String},
      available_status: {type: Boolean},
 })

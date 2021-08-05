@@ -13,7 +13,6 @@ export class WaiterManagementService {
         try {
             const waiters = await this.waiterModel.find().exec();
             return waiters.map((waiter) => ({
-                id: waiter.id,
                 uniq: waiter.uniq,
                 userId: waiter.userId,
                 name: waiter.name,
@@ -45,7 +44,6 @@ export class WaiterManagementService {
         try {
             const waiter = await this.waiterModel.findById(id).exec();
             return {
-                id: waiter.id,
                 uniq: waiter.uniq,
                 userId: waiter.userId,
                 name: waiter.name,
@@ -63,7 +61,7 @@ export class WaiterManagementService {
 
     async update(id: string,waterDto: CreateWaiterDto) {
         try {
-            await this.waiterModel.findByIdAndUpdate(id, waterDto).exec()
+            await this.waiterModel.findOneAndUpdate({uniq: id}, waterDto).exec()
             return {message: "success!"};
         } catch (error) {
             throw new NotFoundException();
@@ -73,7 +71,7 @@ export class WaiterManagementService {
 
     async delete(id) {
         try {
-            const waiter = await this.waiterModel.findByIdAndDelete(id);
+            await this.waiterModel.findOneAndDelete({uniq: id});
             return {message: "Waiter Deleted!"};
         } catch (error) {
             throw new NotFoundException();

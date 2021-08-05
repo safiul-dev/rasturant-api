@@ -13,7 +13,6 @@ export class ItemManagementService {
         try {
             const items = await this.itemModel.find().exec();
             return items.map((item) => ({
-                id: item.id,
                 uniq: item.uniq,
                 userId: item.userId,
                 title: item.title,
@@ -45,7 +44,6 @@ export class ItemManagementService {
         try {
             const item = await this.itemModel.findById(id).exec();
             return {
-                id: item.id,
                 uniq: item.uniq,
                 userId: item.userId,
                 title: item.title,
@@ -63,7 +61,7 @@ export class ItemManagementService {
 
     async update(id: string, itemDto: CreateItemDto): Promise<{}> {
         try {
-            await this.itemModel.findByIdAndUpdate(id, itemDto).exec()
+            await this.itemModel.findOneAndUpdate({uniq: id}, itemDto).exec()
             return {message: "success!"};
         } catch (error) {
             throw new NotFoundException();
@@ -73,7 +71,7 @@ export class ItemManagementService {
 
     async delete(id) {
         try {
-            const item = await this.itemModel.findByIdAndDelete(id);
+            const item = await this.itemModel.findOneAndUpdate({uniq: id});
             return {message: "item Deleted!"};
         } catch (error) {
             throw new NotFoundException();

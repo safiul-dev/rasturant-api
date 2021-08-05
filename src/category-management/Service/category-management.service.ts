@@ -19,7 +19,6 @@ export class CategoryManagementService {
             
            
             const  categoryss = await categorys.map((category) => ({
-                id: category.id,
                 uniq: category.uniq,
                 userName: category.userId,
                 parent: category.parent,
@@ -53,7 +52,6 @@ export class CategoryManagementService {
             const user = this.getUserName(category.userId);
  
             return {
-                id: category.id,
                 uniq: category.uniq,
                 userName: (await user).toString(),
                 parent: category.parent,
@@ -69,7 +67,7 @@ export class CategoryManagementService {
 
     async update(id: string,categoryDto: CreateCategoryDto) {
         try {
-            const category = await this.categoryModel.findByIdAndUpdate(id, categoryDto).exec()
+            const category = await this.categoryModel.findOneAndUpdate({uniq: id}, categoryDto).exec()
             return "success!";
         } catch (error) {
             throw new NotFoundException();
@@ -79,7 +77,7 @@ export class CategoryManagementService {
 
     async delete(id) {
         try {
-            const category = await this.categoryModel.findByIdAndDelete(id);
+             await this.categoryModel.findOneAndDelete({uniq: id});
             return "Cutomer Deleted!";
         } catch (error) {
             throw new NotFoundException();
@@ -95,7 +93,6 @@ export class CategoryManagementService {
     async getActiveCategorys () {
         const categorys = await this.categoryModel.find({active: true}).exec();
         return categorys.map(category => ({
-            id: category.id,
             uniq: category.uniq,
             userName: category.userId,
             parent: category.parent,

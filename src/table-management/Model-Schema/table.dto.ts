@@ -12,8 +12,8 @@ export class CreateTableDto {
 //     @Length(2, 256)
      title: string
 
-     @IsNumber()
-     capacity: number
+     
+     capacity: string
 
 //     @IsBoolean()
      available_status: boolean

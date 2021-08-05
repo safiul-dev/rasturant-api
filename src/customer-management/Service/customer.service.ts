@@ -13,7 +13,6 @@ export class CustomerService {
         try {
             const customers = await this.customerModel.find().exec();
             return customers.map((cus) => ({
-                id: cus.id,
                 uniq: cus.uniq,
                 userId: cus.userId,
                 name: cus.name,
@@ -45,7 +44,6 @@ export class CustomerService {
         try {
             const customer = await this.customerModel.findById(id).exec();
             return {
-                id: customer.id,
                 uniq: customer.uniq,
                 userId: customer.userId,
                 name: customer.name,
@@ -63,7 +61,7 @@ export class CustomerService {
 
     async update(id: string,customerDto: CreateCustomerDto) {
         try {
-            const customer = await this.customerModel.findByIdAndUpdate(id, customerDto).exec()
+            const customer = await this.customerModel.findOneAndUpdate({uniq: id}, customerDto).exec()
             return "success!";
         } catch (error) {
             throw new NotFoundException();
@@ -73,7 +71,7 @@ export class CustomerService {
 
     async delete(id) {
         try {
-            const customer = await this.customerModel.findByIdAndDelete(id);
+            await this.customerModel.findOneAndDelete({uniq: id});
             return "Cutomer Deleted!";
         } catch (error) {
             throw new NotFoundException();
