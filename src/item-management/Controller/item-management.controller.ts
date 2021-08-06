@@ -5,6 +5,7 @@ import { User } from 'src/users/Model/users.model';
 import { CreateItemDto } from '../Model-Schema/item.dto';
 import { ItemManagementService } from '../Service/item-management.service';
 
+
 @Controller('api/items')
 export class ItemManagementController {
     constructor(private readonly itemService: ItemManagementService) {}
@@ -44,6 +45,7 @@ export class ItemManagementController {
     // @UseGuards(JwtAuthGuard)
     async itemDelete(@Param('id') id: string) {
         const result = await this.itemService.delete(id);
+       
         return result;
     }
 }

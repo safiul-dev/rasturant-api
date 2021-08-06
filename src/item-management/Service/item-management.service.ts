@@ -1,13 +1,13 @@
 import { Injectable, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateWaiterDto } from 'src/waiter-management/Model-Schema/waiter.dto';
+import { SubPricingService } from 'src/sub-item-pricing/Service/sub-item.service';
 import { CreateItemDto } from '../Model-Schema/item.dto';
 import { Item } from '../Model-Schema/item.model';
 
 @Injectable()
 export class ItemManagementService {
-    constructor ( @InjectModel("Item") private itemModel: Model<Item>) {}
+    constructor ( @InjectModel("Item") private itemModel: Model<Item>, private readonly subPricingService: SubPricingService) {}
 
     async index (): Promise<Item | any> {
         try {
@@ -71,8 +71,9 @@ export class ItemManagementService {
 
     async delete(id) {
         try {
-            const item = await this.itemModel.findOneAndUpdate({uniq: id});
-            return {message: "item Deleted!"};
+            await this.itemModel.findOneAndUpdate({uniq: id});
+            const subitem = await this.subPricingService.deleteSubPricingWithItem(id)
+            return subitem+'Also Item Delete';
         } catch (error) {
             throw new NotFoundException();
         }

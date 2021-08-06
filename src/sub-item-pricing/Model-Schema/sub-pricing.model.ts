@@ -2,7 +2,6 @@ import { Document } from "mongoose";
 
 export interface SubPricing extends Document{
 
-    readonly id: string
     readonly uniq: string
     readonly title: string
     readonly description: string

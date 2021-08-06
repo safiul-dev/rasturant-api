@@ -97,4 +97,21 @@ export class SubPricingService {
             throw new NotFoundException();
         }
     }
+
+    public async deleteSubPricingWithItem (itemUniq: string): Promise<any> {
+        try {
+             var items: any[] = []
+            const subItem = await this.getAllByItem(itemUniq);
+            if (subItem.length > 0) {
+                subItem.map((item, index) => items[index] = item.uniq)
+            }
+            for (let i = 0; i < items.length; i++) {
+                await this.delete(items[i]);
+            }
+            return 'sub Item Delete';
+            
+        } catch (error) {
+            throw new NotFoundException();
+        }
+    }
 }

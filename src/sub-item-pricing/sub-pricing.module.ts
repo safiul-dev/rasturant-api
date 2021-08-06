@@ -4,12 +4,14 @@ import { SubPricingController } from './Controller/sub-item.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { SubPricingSchema } from './Model-Schema/sub-pricing.schema';
 
+
 @Module({
   imports: [MongooseModule.forFeature([{
     name: "SubPricing",
     schema: SubPricingSchema
-  }])],
+  }])], 
   providers: [SubPricingService],
-  controllers: [SubPricingController]
+  controllers: [SubPricingController],
+  exports: [SubPricingService]
 })
 export class SubPricingModule {}
