@@ -59,6 +59,11 @@ export class UsersService {
         return user.firstname + " " + user.lastname;
 
     }
-
+    async deleteUser(id: string) {
+        await this.userModel.findOneAndDelete({uniq: id}).exec();
+        return {
+            message: "Delete Success!"
+        }
+    }
 
 }

@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller,Delete, Get, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CreateUsersDto } from '../Dto/users.dto';
 import { UsersService } from '../Service/users.service';
 
-@Controller('users')
+@Controller('api/users')
 export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
@@ -23,5 +23,11 @@ export class UsersController {
     singleUser(@Param("id") id: string) {
         const user = this.usersService.edit(id);
         return user;
+    }
+
+    @Delete(':id')
+    async delete(@Param('id') id: string) {
+        const result = await this.usersService.deleteUser(id);
+        return result;
     }
 }
