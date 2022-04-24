@@ -68,7 +68,7 @@ export class WorkPeriodsService {
 
     async update(id: string,workPeriodDto: CreateWorkPeriodDto) {
         try {
-            const workPeriod = await this.workPeriodService.findByIdAndUpdate(id, workPeriodDto).exec()
+            await this.workPeriodService.findByIdAndUpdate(id, workPeriodDto).exec()
             return "success!";
         } catch (error) {
             throw new NotFoundException();
